@@ -16,13 +16,17 @@ public class GenerateStudents {
         int studentCount = 10000;
         StudentList students = new StudentList(studentCount);
 //        System.out.println(students);
-        ArrayList a = new ArrayList();
-        String s = "zzzz9";
-        for (int i = 0; i < studentCount; i++) {
-             int x;
-             x = HashFunction.hashed(students.getStudent(i).getLdap());
-             System.out.println(x);
-          }
+        Student[]array = new Student[studentCount];
+//        for (int i = 0; i < studentCount; i++) {
+//             int x;
+//             x = HashFunction.hashed(students.getStudent(i).getLdap())%97;
+//             arr[i] = x;
+//          }
+//        for (int i = 0; i < studentCount; i++) {
+//             System.out.println(arr[i]);
+//        }
+        HashFunction hashFunction = new HashFunction(students, array);
+        
     }
     
 }

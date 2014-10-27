@@ -10,8 +10,15 @@ package generatestudents;
  * @author gebak_000
  */
 public class HashFunction {
+    StudentList list;
+    Student[]array;
     
-//    System.out.println(k);
+    public HashFunction(StudentList list,Student[]array) {
+    this.list = list;
+    this.array=array;
+    }
+
+    
     public static int hashed(String s){
     char ch;
     char[]ca = s.toCharArray();
@@ -32,5 +39,23 @@ public class HashFunction {
     }
     k = k%10000;    
     return k;
+    }
+    
+    public void hashFunction1(StudentList list, Student[]array){
+        for (int i = 0; i < list.size(); i++) {
+             Student newElement = list.getStudent(i);
+             int arrayIndex = hashed(list.getStudent(i).getLdap())%97;
+             
+             System.out.println("Modulus index = "+arrayIndex+" for value "+newElement);
+             
+             while(array[arrayIndex]!=null){
+                ++arrayIndex;
+                System.out.println("Collision, try"+arrayIndex+" instead");
+                arrayIndex%=array.length;
+            }
+             array[arrayIndex]=newElement;
+        }
+        
+        
     }
 }
