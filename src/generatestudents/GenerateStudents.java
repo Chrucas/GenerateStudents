@@ -20,8 +20,8 @@ public class GenerateStudents {
         String s = "zzzz9";
         for (int i = 0; i < studentCount; i++) {
              int x;
-            x = HashFunction.hashed(students.getStudent(i).getLdap());
-            System.out.println(x);
+             x = HashFunction.hashed(students.getStudent(i).getLdap());
+             System.out.println(x);
           }
     }
     

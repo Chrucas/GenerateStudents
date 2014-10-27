@@ -28,7 +28,7 @@ public class HashFunction {
 
     int k = 0;
     for (int i = 0; i < si.length; i++){
-         k = 37 * k + si[i];
+         k = 8 * k + si[i];
     }
     k = k%10000;    
     return k;
