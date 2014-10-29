@@ -41,21 +41,37 @@ public class HashFunction {
     return k;
     }
     
-    public void hashFunction1(StudentList list, Student[]array){
-        for (int i = 0; i < list.size(); i++) {
-             Student newElement = list.getStudent(i);
-             int arrayIndex = hashed(list.getStudent(i).getLdap())%97;
+    public static void quadraticProbing(Student[] list, Student[]array){
+        System.out.println(list.length);
+        for (int i = 0; i < list.length-1; i++) {
+
+            Student newElement = list[i];
+             int arrayIndex = hashed(newElement.getLdap())%97;
              
-             System.out.println("Modulus index = "+arrayIndex+" for value "+newElement);
+             
+             while(array[arrayIndex]!=null){
+                arrayIndex=arrayIndex*4;
+                arrayIndex%=array.length;
+            }
+             System.out.println("Modulus index = "+arrayIndex+" for "+newElement.getLdap());
+             array[arrayIndex]=newElement;
+        }
+    } 
+   
+    public static void linearProbing(Student[] list, Student[]array){
+        System.out.println(list.length);
+        for (int i = 0; i < list.length-1; i++) {
+
+            Student newElement = list[i];
+             int arrayIndex = hashed(newElement.getLdap())%97;
+             
              
              while(array[arrayIndex]!=null){
                 ++arrayIndex;
-                System.out.println("Collision, try"+arrayIndex+" instead");
                 arrayIndex%=array.length;
             }
+             System.out.println("Modulus index = "+arrayIndex+" for "+newElement.getLdap()+" from "+ i);
              array[arrayIndex]=newElement;
-        }
-        
-        
-    }
+        }    
+    }  
 }
