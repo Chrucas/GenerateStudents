@@ -6,6 +6,7 @@
 package generatestudents;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -80,19 +81,24 @@ public class HashFunction {
         }    
     }
     
-    public static void seperateChaining(Student[] Slist, StudentList[]chainingArray){
+    public static void seperateChaining(Student[] Slist, ArrayList<ArrayList<Student>> chainingList){
  
         for (int i = 0; i < Slist.length-1; i++) {
             Student newElement = Slist[i];
              int arrayIndex = hashed(newElement.getLdap());
              
-             if(chainingArray[arrayIndex]!=null){
-                 collisions++;
-                 chainingArray[arrayIndex].add(newElement);
+             if(chainingList.get(arrayIndex)!=null){
+                 ArrayList newList = chainingList.get(arrayIndex);
+                 newList.add(newElement);
+//                 chainingList.set(arrayIndex, newList);
+                collisions++;
              }
+             else{
              
-             StudentList addList = new StudentList(100);
-             chainingArray[arrayIndex]=addList;
+             ArrayList newList = new ArrayList();
+             newList.add(newElement);
+             chainingList.set(arrayIndex, newList);
+             }
              System.out.println("Modulus index = "+arrayIndex+" for "+newElement.getLdap()+" from "+ i);
              
         }
