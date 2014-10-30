@@ -5,6 +5,8 @@
  */
 package generatestudents;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author gebak_000
@@ -12,6 +14,7 @@ package generatestudents;
 public class HashFunction {
     StudentList list;
     Student[]array;
+    static int collisions;
     
     public HashFunction(StudentList list,Student[]array) {
     this.list = list;
@@ -35,27 +38,29 @@ public class HashFunction {
 
     int k = 0;
     for (int i = 0; i < si.length; i++){
-         k = 8 * k + si[i];
+         k = 7 * k + si[i];
     }
     k = k%10000;    
     return k;
     }
     
-    public static void quadraticProbing(Student[] list, Student[]array){
+    public static void doubleHashing(Student[] list, Student[]array){
         System.out.println(list.length);
         for (int i = 0; i < list.length-1; i++) {
 
             Student newElement = list[i];
-             int arrayIndex = hashed(newElement.getLdap())%97;
-             
+             int arrayIndex = hashed(newElement.getLdap());
+             int stepDistance = 5-hashed(newElement.getLdap())%5;
              
              while(array[arrayIndex]!=null){
-                arrayIndex=arrayIndex*4;
+                collisions++;
+                arrayIndex+=stepDistance;
                 arrayIndex%=array.length;
             }
-             System.out.println("Modulus index = "+arrayIndex+" for "+newElement.getLdap());
+             System.out.println("Modulus index = "+arrayIndex+" for "+newElement.getLdap()+" from "+ i);
              array[arrayIndex]=newElement;
         }
+        System.out.println(collisions);
     } 
    
     public static void linearProbing(Student[] list, Student[]array){
@@ -63,7 +68,7 @@ public class HashFunction {
         for (int i = 0; i < list.length-1; i++) {
 
             Student newElement = list[i];
-             int arrayIndex = hashed(newElement.getLdap())%97;
+             int arrayIndex = hashed(newElement.getLdap());
              
              
              while(array[arrayIndex]!=null){
@@ -73,5 +78,25 @@ public class HashFunction {
              System.out.println("Modulus index = "+arrayIndex+" for "+newElement.getLdap()+" from "+ i);
              array[arrayIndex]=newElement;
         }    
-    }  
+    }
+    
+    public static void seperateChaining(Student[] Slist, StudentList[]chainingArray){
+ 
+        for (int i = 0; i < Slist.length-1; i++) {
+            Student newElement = Slist[i];
+             int arrayIndex = hashed(newElement.getLdap());
+             
+             if(chainingArray[arrayIndex]!=null){
+                 collisions++;
+                 chainingArray[arrayIndex].add(newElement);
+             }
+             
+             StudentList addList = new StudentList(100);
+             chainingArray[arrayIndex]=addList;
+             System.out.println("Modulus index = "+arrayIndex+" for "+newElement.getLdap()+" from "+ i);
+             
+        }
+        System.out.println(collisions);
+    }
+    
 }

@@ -16,7 +16,7 @@ public class GenerateStudents {
         int studentCount = 10000;
         StudentList students = new StudentList(studentCount);
 //        System.out.println(students);
-        Student[]array = new Student[10501];
+        Student[]array = new Student[14501];
 //        for (int i = 0; i < studentCount; i++) {
 //             int x;
 //             x = HashFunction.hashed(students.getStudent(i).getLdap())%97;
@@ -26,9 +26,10 @@ public class GenerateStudents {
 //             System.out.println(arr[i]);
 //        }
 //        HashFunction hashFunction = new HashFunction(students, array);
-        System.out.println(students.getList().length);
-        HashFunction.linearProbing(students.getList(), array);
-//        HashFunction.quadraticProbing(students.getList(), array);
+//        System.out.println(students.getList().length);
+//        HashFunction.linearProbing(students.getList(), array);
+        HashFunction.doubleHashing(students.getList(), array);
+//        HashFunction.doubleHashing(array, array);
 
     }
     
