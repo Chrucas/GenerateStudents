@@ -90,7 +90,7 @@ public class HashFunction {
              if(chainingList.get(arrayIndex)!=null){
                  ArrayList newList = chainingList.get(arrayIndex);
                  newList.add(newElement);
-//                 chainingList.set(arrayIndex, newList);
+                 chainingList.set(arrayIndex, newList);
                 collisions++;
              }
              else{

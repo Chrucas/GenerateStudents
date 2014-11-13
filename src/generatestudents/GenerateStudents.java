@@ -29,7 +29,7 @@ public class GenerateStudents {
 //        HashFunction hashFunction = new HashFunction(students, array);
 //        System.out.println(students.getList().length);
 //        HashFunction.linearProbing(students.getList(), array);
-        HashFunction.seperateChaining(students.getList(), chainingList);
+        HashFunction.seperateChaining(array, chainingList);
 //        HashFunction.doubleHashing(array, array);
 
     }
